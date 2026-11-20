@@ -546,6 +546,20 @@ public class Home implements Serializable, Cloneable {
   }
 
   /**
+   * Returns an unmodifiable list of the viewable levels of this home,
+   * in the same order as {@link #getLevels()}.
+   */
+  public List<Level> getViewableLevels() {
+    List<Level> viewableLevels = new ArrayList<Level>();
+    for (Level level : this.levels) {
+      if (level.isViewable()) {
+        viewableLevels.add(level);
+      }
+    }
+    return Collections.unmodifiableList(viewableLevels);
+  }
+
+  /**
    * Adds the given <code>level</code> to the list of levels of this home.
    * Once the <code>level</code> is added, level listeners added to this home will receive a
    * {@link CollectionListener#collectionChanged(CollectionEvent) collectionChanged}
